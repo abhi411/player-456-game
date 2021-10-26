@@ -9,11 +9,13 @@ exports.create = (req, res) => {
     return;
   }
 
+  const { playerID, playerName, tokenID } = req.body;
+
   // Create a Player
   const player = new Player({
-    playerID: req.body.playerID,
-    playerName: req.body.playerName,
-    tokenID: req.body.tokenID
+    playerID,
+    playerName,
+    tokenID
   });
 
   // Save Player in the database
@@ -43,6 +45,49 @@ exports.findAll = (req, res) => {
       res.status(500).send({  
         message:
           err.message || "Some error occurred while retrieving players."
+      });
+    });
+};
+
+// Update a Player's score by the tokenID in the request
+exports.updateScore = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to update can not be empty!"
+    });
+  }
+
+  const playerID = req.params.playerID;
+
+  // Player.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  //   .then(data => {
+  //     if (!data) {
+  //       res.status(404).send({
+  //         message: `Cannot update Player with id=${id}. Maybe Player was not found!`
+  //       });
+  //     } else res.send({ message: "Player was updated successfully." });
+  //   })
+  //   .catch(err => {
+  //     res.status(500).send({
+  //       message: "Error updating Player with id=" + id
+  //     });
+  //   });
+
+  Player.findOne({ playerID })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Player with id=${playerID}. Maybe Player was not found!`
+        });
+      } else {
+        data.score = req.body.score;
+        data.save();
+        res.send({ message: "Player was updated successfully." });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Player with id=" + playerID
       });
     });
 };

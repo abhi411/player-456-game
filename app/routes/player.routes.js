@@ -9,5 +9,8 @@ module.exports = app => {
   // Retrieve all Players
   router.get("/", players.findAll);
 
+  // Update a Player with id
+  router.put("/:playerID", players.updateScore);
+
   app.use("/api/players", router);
 };

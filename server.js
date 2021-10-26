@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is
 const db = require("./app/models");
 db.mongoose
   .connect(db.url, {
+    useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

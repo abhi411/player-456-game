@@ -1,9 +1,24 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      playerID: Number,
-      playerName: String,
-      tokenID: Number
+      playerID: {
+        type: Number,
+        required: true,
+        unique: true
+      },
+      playerName: {
+        type: String,
+        required: true,
+      },
+      tokenID: {
+        type: Number,
+        required: true,
+        unique: true,
+      },
+      score: {
+        type: Number,
+        default: 0
+      }
     },
     { timestamps: true }
   );
