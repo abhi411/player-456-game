@@ -59,20 +59,6 @@ exports.updateScore = (req, res) => {
 
   const playerID = req.params.playerID;
 
-  // Player.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-  //   .then(data => {
-  //     if (!data) {
-  //       res.status(404).send({
-  //         message: `Cannot update Player with id=${id}. Maybe Player was not found!`
-  //       });
-  //     } else res.send({ message: "Player was updated successfully." });
-  //   })
-  //   .catch(err => {
-  //     res.status(500).send({
-  //       message: "Error updating Player with id=" + id
-  //     });
-  //   });
-
   Player.findOne({ playerID })
     .then(data => {
       if (!data) {
