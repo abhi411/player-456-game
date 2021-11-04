@@ -4,11 +4,33 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
+// var corsOptions = {
+//   // origin: "*"
+//   origin: [
+//     "http://localhost:3001"
+//   ]
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+
+var allowedOrigins = ['http://localhost:3001',
+                      'https://floating-bastion-11306.herokuapp.com'];
+
+app.use(cors({
+    origin: function(origin, callback){
+      // allow requests with no origin 
+      // (like mobile apps or curl requests)
+      if(!origin) return callback(null, true);
+
+      if(allowedOrigins.indexOf(origin) === -1){
+        var msg = 'The CORS policy for this site does not ' +
+                  'allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    }
+  })
+);
 
 // parse requests of content-type - application/json
 app.use(express.json());  /* bodyParser.json() is deprecated */

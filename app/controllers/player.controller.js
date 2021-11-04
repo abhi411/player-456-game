@@ -68,7 +68,7 @@ exports.updateScore = (req, res) => {
       } else {
         data.score = req.body.score;
         data.save();
-        res.send({ message: "Player was updated successfully." });
+        res.send({ message: "Player was updated successfully. Score: " + req.body.score });
       }
     })
     .catch(err => {
