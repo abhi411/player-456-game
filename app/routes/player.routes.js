@@ -1,4 +1,4 @@
-module.exports = app => {
+module.exports = (app) => {
   const players = require("../controllers/player.controller.js");
 
   var router = require("express").Router();
@@ -11,6 +11,9 @@ module.exports = app => {
 
   // Update a Player with id
   router.post("/:playerID", players.updateScore);
+
+  //Retrieve Player's Status
+  router.get("/:playerID", players.hasPlayed);
 
   app.use("/api/players", router);
 };

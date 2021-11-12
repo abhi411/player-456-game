@@ -1,10 +1,10 @@
-module.exports = mongoose => {
+module.exports = (mongoose) => {
   var schema = mongoose.Schema(
     {
       playerID: {
         type: Number,
         required: true,
-        unique: true
+        unique: true,
       },
       playerName: {
         type: String,
@@ -17,13 +17,17 @@ module.exports = mongoose => {
       },
       score: {
         type: Number,
-        default: 0
-      }
+        default: 0,
+      },
+      hasPlayed: {
+        type: Boolean,
+        default: false,
+      },
     },
     { timestamps: true }
   );
 
-  schema.method("toJSON", function() {
+  schema.method("toJSON", function () {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;

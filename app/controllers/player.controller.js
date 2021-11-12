@@ -15,19 +15,19 @@ exports.create = (req, res) => {
   const player = new Player({
     playerID,
     playerName,
-    tokenID
+    tokenID,
   });
 
   // Save Player in the database
   player
     .save(player)
-    .then(data => {
+    .then((data) => {
       res.send(data);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Player."
+          err.message || "Some error occurred while creating the Player.",
       });
     });
 };
@@ -35,16 +35,15 @@ exports.create = (req, res) => {
 // Retrieve all Players from the database.
 exports.findAll = (req, res) => {
   Player.find({})
-    .then(data => {
+    .then((data) => {
       res.json({
         total: data.length,
-        players: data
+        players: data,
       });
     })
-    .catch(err => {
-      res.status(500).send({  
-        message:
-          err.message || "Some error occurred while retrieving players."
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving players.",
       });
     });
 };
@@ -53,27 +52,60 @@ exports.findAll = (req, res) => {
 exports.updateScore = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
-      message: "Data to update can not be empty!"
+      message: "Data to update can not be empty!",
     });
   }
 
   const playerID = req.params.playerID;
 
   Player.findOne({ playerID })
-    .then(data => {
+    .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update Player with id=${playerID}. Maybe Player was not found!`
+          message: `Cannot update Player with id=${playerID}. Maybe Player was not found!`,
         });
       } else {
         data.score = req.body.score;
+        data.hasPlayed = req.body.hasPlayed;
         data.save();
-        res.send({ message: "Player was updated successfully. Score: " + req.body.score });
+        res.send({
+          message: "Player was updated successfully. Score: " + req.body.score,
+        });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message: "Error updating Player with id=" + playerID
+        message: "Error updating Player with id=" + playerID,
+      });
+    });
+};
+
+// Get a Player's hasPlayed Status by the tokenID in the request
+exports.hasPlayed = (req, res) => {
+  if (!req.body) {
+    return res.status(400).send({
+      message: "Data to be retrieved can not be empty!",
+    });
+  }
+
+  const playerID = req.params.playerID;
+
+  Player.findOne({ playerID })
+    .then((data) => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Player with id=${playerID}. Maybe Player was not found!`,
+        });
+      } else {
+        res.json({
+          id: playerID,
+          hasPlayed: data.hasPlayed,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error Gettting Player with id=" + playerID,
       });
     });
 };
