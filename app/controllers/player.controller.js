@@ -1,5 +1,7 @@
 const db = require("../models");
+const config = require("../config/db.config");
 const Player = db.players;
+const jwt = require('jsonwebtoken')
 
 // Create and Save a new Player
 exports.create = (req, res) => {
@@ -8,7 +10,7 @@ exports.create = (req, res) => {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
-
+  console.log(req.body)
   const { playerID, playerName, tokenID } = req.body;
 
   // Create a Player
@@ -22,7 +24,18 @@ exports.create = (req, res) => {
   player
     .save(player)
     .then((data) => {
-      res.send(data);
+
+      // Create token
+      const token = jwt.sign(
+        { data: data },
+        config.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+      // send token
+      res.send(token);
     })
     .catch((err) => {
       res.status(500).send({
@@ -49,7 +62,7 @@ exports.findAll = (req, res) => {
 };
 
 // Update a Player's score by the tokenID in the request
-exports.updateScore = (req, res) => {
+exports.updateScore = (req, res, ) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update can not be empty!",

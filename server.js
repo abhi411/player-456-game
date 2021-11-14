@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require('jwt-token')
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
 
