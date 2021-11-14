@@ -6,16 +6,20 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   // Create a new Player
-  router.post("/", players.create);
+  router.post("/", auth.verifycreate,players.create);
+  router.get("/token/create/", players.gettokencreate );
 
   // Retrieve all Players
-  router.get("/", auth, players.findAll);
+  router.get("/", auth.verifyplayers, players.findAll);
+  router.get("/token/players/", players.gettokenplayers );
 
   // Update a Player with id
-  router.post("/:playerID", auth, players.updateScore);
+  router.post("/:playerID", auth.verifyputplayer, players.updateScore);
+  router.get("/token/putplayer/", players.gettokenuplayer );
 
   //Retrieve Player's Status
-  router.get("/:playerID", auth, players.hasPlayed);
+  router.get("/:playerID", auth.verifyplayer, players.hasPlayed);
+  router.get("/token/player/", players.gettokenplayer);
 
   app.use("/api/players", router);
 };

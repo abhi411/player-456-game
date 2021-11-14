@@ -3,6 +3,51 @@ const config = require("../config/db.config");
 const Player = db.players;
 const jwt = require('jsonwebtoken')
 
+//get token
+exports.gettokencreate = ( req,res ) => {
+  // Create token
+  const token = jwt.sign(
+    { method: "create" },
+    config.TOKEN_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
+  res.send(token)
+}
+exports.gettokenuplayer = ( req,res ) => {
+  // Create token
+  const token = jwt.sign(
+    { method: "putplayer" },
+    config.TOKEN_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
+  res.send(token)
+}
+exports.gettokenplayers = ( req,res ) => {
+  // Create token
+  const token = jwt.sign(
+    { method: "players" },
+    config.TOKEN_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
+  res.send(token)
+}
+exports.gettokenplayer = ( req,res ) => {
+  // Create token
+  const token = jwt.sign(
+    { method: "player" },
+    config.TOKEN_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
+  res.send(token)
+}
 // Create and Save a new Player
 exports.create = (req, res) => {
   // Validate request
@@ -25,17 +70,10 @@ exports.create = (req, res) => {
     .save(player)
     .then((data) => {
 
-      // Create token
-      const token = jwt.sign(
-        { data: data },
-        config.TOKEN_KEY,
-        {
-          expiresIn: "2h",
-        }
-      );
+      
 
-      // send token
-      res.send(token);
+      // send data
+      res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
