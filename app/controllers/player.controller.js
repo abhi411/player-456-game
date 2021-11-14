@@ -5,10 +5,12 @@ const jwt = require('jsonwebtoken')
 
 //get token
 exports.gettokencreate = ( req,res ) => {
+  const key = req.body.key || req.query.key || req.headers["token-key"];
   // Create token
+  console.log(key)
   const token = jwt.sign(
     { method: "create" },
-    config.TOKEN_KEY,
+    key,
     {
       expiresIn: "2h",
     }
@@ -16,10 +18,11 @@ exports.gettokencreate = ( req,res ) => {
   res.send(token)
 }
 exports.gettokenuplayer = ( req,res ) => {
+  const key = req.body.key || req.query.key || req.headers["token-key"];
   // Create token
   const token = jwt.sign(
     { method: "putplayer" },
-    config.TOKEN_KEY,
+    key,
     {
       expiresIn: "2h",
     }
@@ -27,10 +30,11 @@ exports.gettokenuplayer = ( req,res ) => {
   res.send(token)
 }
 exports.gettokenplayers = ( req,res ) => {
+  const key = req.body.key || req.query.key || req.headers["token-key"];
   // Create token
   const token = jwt.sign(
     { method: "players" },
-    config.TOKEN_KEY,
+    key,
     {
       expiresIn: "2h",
     }
@@ -38,10 +42,11 @@ exports.gettokenplayers = ( req,res ) => {
   res.send(token)
 }
 exports.gettokenplayer = ( req,res ) => {
+  const key = req.body.key || req.query.key || req.headers["token-key"];
   // Create token
   const token = jwt.sign(
     { method: "player" },
-    config.TOKEN_KEY,
+    key,
     {
       expiresIn: "2h",
     }
