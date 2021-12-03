@@ -15,7 +15,7 @@ const app = express();
 // app.use(cors(corsOptions));
 
 var allowedOrigins = ['http://localhost:3001',
-                      'https://floating-bastion-11306.herokuapp.com'];
+                      'https://floating-bastion-11306.herokuapp.com', 'https://player456-game.herokuapp.com'];
 
 app.use(cors({
     origin: function(origin, callback){
