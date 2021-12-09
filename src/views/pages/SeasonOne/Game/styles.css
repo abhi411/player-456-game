@@ -1,0 +1,10 @@
+.runner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+canvas {
+  background: #fff;
+  display: block;
+  border-radius: 5px;
+}
