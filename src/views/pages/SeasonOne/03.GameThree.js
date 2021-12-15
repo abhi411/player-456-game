@@ -6,6 +6,7 @@ import "./breakout.js"
 import {GlobalScore,setGlobalScore} from '../../components/GlobalScore';
 import { updatePlayerDatabase,updatePlayerDatabaseBefore } from "util/interactions-game";
 import { useHistory } from "react-router-dom";
+var ret;
 const GameFour = (props) => {
   // This is the ID of the current player so we can pass it to the DB later
   const [activePlayer, setActivePlayer] = useContext(PlayerContext);
@@ -172,6 +173,7 @@ useEffect(() => {
     // Hit bottom wall - Lose
     if (ball.y + ball.size > canvas.height) {
       console.log("show all balls")
+      cancelAnimationFrame(ret)
       onGameOver()
       // showAllBricks();
       // score = 0;
@@ -229,8 +231,9 @@ useEffect(() => {
   
     // Draw everything
     draw();
-  
-    requestAnimationFrame(update);
+    ret = requestAnimationFrame(update);
+    console.log("ret",ret)
+    //requestAnimationFrame(update);
   }
   
   update();
@@ -278,6 +281,7 @@ useEffect(() => {
   // closeBtn.addEventListener('click', () => {  alert(`Game Over.`);
   // showAllBricks();
   //     score = 0;});
+return () => cancelAnimationFrame(ret);
 },[])
 
 function displayrule(){
