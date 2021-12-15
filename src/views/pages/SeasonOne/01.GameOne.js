@@ -155,7 +155,7 @@ const GameOne = (props) => {
   }
   return (
     <div className="game-container" ref={gameContainerRef} style={{backgroundColor: "#191970"}}>
-        <div style={{width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'center', backgroundColor: 'black'}}>
+        <div style={{width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
           {/* BUTTON HERE */}
           {/* <GlobalScore game="Reaction Game"/> */}
   {/*        <button className="button" onClick={() => {onGameOver()}}>End Game</button>*/}
