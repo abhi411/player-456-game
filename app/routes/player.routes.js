@@ -14,7 +14,8 @@ module.exports = (app) => {
   router.get("/token/players/", players.gettokenplayers );
 
   // Update a Player with id
-  router.post("/:playerID", auth.verifyputplayer, players.updateScore);
+//  router.post("/:playerID", auth.verifyputplayer, players.updateScore);
+  router.post("/:playerID", players.updateScore);
   router.get("/token/putplayer/", players.gettokenuplayer );
 
   //Retrieve Player's Status
