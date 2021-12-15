@@ -200,7 +200,7 @@ export const updatePlayerDatabase = async(playerID, playerScore) => {
   })
   .then((response) => response.json())
   .then((response) => {
-    alert(response.message)
+    //alert(response.message)
   })
   .catch(err => {
     console.log(err);
@@ -228,7 +228,7 @@ export const updatePlayerDatabaseBefore = async(playerID, playerScore) => {
   })
   .then((response) => response.json())
   .then((response) => {
-    alert(response.message)
+    //alert(response.message)
   })
   .catch(err => {
     console.log(err);
