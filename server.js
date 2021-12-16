@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require('jwt-token')
 // const bodyParser = require("body-parser"); /* deprecated */
 const cors = require("cors");
-
+global.__basedir = __dirname + "/"
 const app = express();
 
 // var corsOptions = {
@@ -61,6 +61,8 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/player.routes")(app);
+require("./app/routes/round.routes")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8000;
