@@ -11,8 +11,8 @@ import RulesPage from "./pages/Rules/RulesPage";
 import { PlayerProvider } from "../util/PlayerContext";
 import GameFour from "./pages/SeasonOne/04.GameFour";
 import GameThree from "./pages/SeasonOne/03.GameThree";
-import GameSix from "./pages/SeasonOne/05.GameSix";
-import GameFive from "./pages/SeasonOne/06.GameFive";
+import GameFive from "./pages/SeasonOne/05.GameSix";
+import GameSix from "./pages/SeasonOne/06.GameFive";
 
 
 const MainContainer = () => {

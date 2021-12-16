@@ -239,3 +239,24 @@ export const updatePlayerDatabaseBefore = async(playerID, playerScore) => {
     // alert(msg);
   });
 }
+export async function getGameDetails  (){
+  const URL = `https://player456.herokuapp.com/api/round/getrounddetails`;
+  //const URL = `http://localhost:8000/api/players/${playerID}`;
+
+  const data=  await fetch(URL, {
+    mode: "cors",
+    method: 'GET', // The method
+    headers: {
+      "content-type": "application/json",
+    }
+  })
+  .then((response) => response.json())
+  .then((response) => {
+    return response
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  console.log("da",data)
+  return data
+}

@@ -24,15 +24,15 @@ return (
         <h2 className="h4 start-date">
           Games have begun
         </h2>
-        {/* <Link to="/games" className="button button__cta">Launch Game</Link> */}
-        <Link to="/gameOne" className="globalBtn">Reaction Game</Link>
+       <Link to="/games" className="button button__cta">Launch Game</Link> 
+      {/*  <Link to="/gameOne" className="globalBtn">Reaction Game</Link>
         <div className="intro intro-content">
           <Link to="/gameTwo" className="globalBtn">Snack Game</Link>
           <Link to="/gameThree" className="globalBtn"> Breakout Game</Link>
           <Link to="/gameFour" className="globalBtn">Tetris Game</Link>
           <Link to="/gameFive" className="globalBtn">Tower Blocks Game</Link>
           <Link to="/gameSix" className="globalBtn">T-Rex Game</Link>
-         </div>
+         </div> */}
       </div>
 
       <div className="site-teaser default-spacing">

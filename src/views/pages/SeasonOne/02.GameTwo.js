@@ -28,9 +28,13 @@ class GameTwo extends Component {
 
   state = initialState;
   static contextType = PlayerContext
-
+  constructor(props) {
+    super(props);
+    this.gameContainerRef = React.createRef();
+  }
   componentDidMount() {
-  const [activePlayer, setActivePlayer] = this.context
+     this.gameContainerRef.current.scrollIntoView();
+    const [activePlayer, setActivePlayer] = this.context
     console.log("PlayerContext",activePlayer)
     updatePlayerDatabaseBefore(activePlayer.playerID);
     setInterval(this.moveSnake, this.state.speed);
@@ -143,7 +147,7 @@ class GameTwo extends Component {
 
   render() {
     return (
-      <div style={{overflow:'hidden'}}>
+      <div  ref={ this.gameContainerRef} style={{overflow:'hidden'}}>
 			{/* <h4 style={{textAlign:'center'}}>Snack Game</h4> */}
        <GlobalScore game="Snack Game"/>
         <div className="game-area">
